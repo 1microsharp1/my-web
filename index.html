@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Proxy Example</title>
+</head>
+<body>
+    <h1>API Result</h1>
+    <div id="apiResult">Loading...</div>
+
+    <script>
+        // 请确保API支持跨源请求，或者您已经设置了CORS代理
+        const apiUrl = 'http://api.sms8.net/api/record?token=08ef72e0cd86107b9219d064658caab1';
+        
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.text();  // 或者 response.json()，如果API返回JSON
+            })
+            .then(data => {
+                document.getElementById('apiResult').textContent = data;
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+                document.getElementById('apiResult').textContent = 'Error fetching data.';
+            });
+    </script>
+</body>
+</html>
